@@ -1,0 +1,34 @@
+.main {
+  background-color: #f4f4f4;
+}
+
+.sideNav {
+  background-color: #444;
+  height: 100vh;
+  color: white;
+  bottom: 0;
+  width: 10%;
+}
+.main {
+  width: 90%;
+}
+body {
+  height: 100%;
+  background-color: #f4f4f4;
+}
+.contain__items {
+  display: flex;
+}
+.list-group li {
+  list-style-type: none;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .sideNav {
+    width: 30%;
+  }
+  .main {
+    width: 70%;
+  }
+}
