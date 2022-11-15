@@ -24,6 +24,7 @@ function Cart() {
       ReceiptNumber: v4(),
       userId: user._id,
       email: user.email,
+      phone_number: user.phone_number,
       products: cartItems,
       address: "",
       status: "pending",

@@ -1,5 +1,5 @@
 import axios from "axios";
-
+const API_URL = "https://azim-online-store-backend.onrender.com/api";
 const user = JSON.parse(localStorage.getItem("user"));
 const getAllUsers = async () => {
   const config = {
@@ -8,8 +8,8 @@ const getAllUsers = async () => {
     },
   };
   try {
-    const response = await axios.get("/user/all", config);
-  
+    const response = await axios.get(API_URL + "/user/all", config);
+
     return response.data;
   } catch (err) {
     console.log(err.message);

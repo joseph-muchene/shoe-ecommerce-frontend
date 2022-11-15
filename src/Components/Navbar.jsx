@@ -1,10 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
+import { logout } from "../app/Feartures/Auth/AuthSlice";
 function Navbar() {
   const { cartItems } = useSelector((state) => state.Cart.Cart);
   const { user } = useSelector((state) => state.Auth);
+  const dispatch = useDispatch();
+  const onLogout = () => {
+    dispatch(logout());
+  };
+
   return (
     <div>
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -83,11 +89,22 @@ function Navbar() {
                 </ul>
               </div>
             )}
-
-            <Link class="text-reset me-3 btn btn-primary mx-3" to="/login">
-              <i class="fa-solid fa-right-to-bracket text-white"></i>
-              <span className="mx-2 text-white">login</span>
-            </Link>
+            {!user && (
+              <Link class="text-reset me-3 btn btn-primary mx-3" to="/login">
+                <i class="fa-solid fa-right-to-bracket text-white"></i>
+                <span className="mx-2 text-white">login</span>
+              </Link>
+            )}
+            {user && (
+              <Link
+                class="text-reset me-3 btn btn-danger mx-3"
+                to="/"
+                onClick={onLogout}
+              >
+                <i class="fa-solid fa-right-to-bracket text-white"></i>
+                <span className="mx-2 text-white">logout</span>
+              </Link>
+            )}
           </div>
         </div>
       </nav>

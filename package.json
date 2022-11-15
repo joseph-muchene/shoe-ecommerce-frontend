@@ -1,7 +1,8 @@
 {
   "name": "client",
   "version": "0.1.0",
-  "proxy": "http://localhost:5000/api",
+  "homepage": ".",
+  "proxy": "https://shoe-ecommerce-backend.vercel.app/api",
   "private": true,
   "dependencies": {
     "@emailjs/browser": "^3.7.0",

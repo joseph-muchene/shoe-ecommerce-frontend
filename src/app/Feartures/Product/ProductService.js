@@ -1,8 +1,11 @@
 import axios from "axios";
 
+const API_URL = "https://azim-online-store-backend.onrender.com/api";
 const getProducts = async ({ size, page }) => {
   try {
-    const response = await axios.get(`/product?size=${size}&page=${page}`);
+    const response = await axios.get(
+      API_URL + `/product?size=${size}&page=${page}`
+    );
 
     return response.data;
   } catch (error) {
@@ -12,7 +15,16 @@ const getProducts = async ({ size, page }) => {
 
 const getAllProducts = async () => {
   try {
-    const response = await axios.get(`/product/all`);
+    const response = await axios.get(API_URL + `/product/all`);
+
+    return response.data;
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+const getAllProductsList = async () => {
+  try {
+    const response = await axios.get(API_URL + `/product/all/list`);
 
     return response.data;
   } catch (error) {
@@ -22,7 +34,7 @@ const getAllProducts = async () => {
 
 const relatedProducts = async (productId) => {
   try {
-    const response = await axios.get(`/product/related/${productId}`);
+    const response = await axios.get(API_URL + `/product/related/${productId}`);
 
     return response.data;
   } catch (error) {
@@ -39,7 +51,11 @@ const createProduct = async (productData) => {
   };
   try {
     console.log(productData);
-    const response = await axios.post("/product", productData, config);
+    const response = await axios.post(
+      API_URL + "/product",
+      productData,
+      config
+    );
 
     return response.data;
   } catch (error) {
@@ -48,7 +64,7 @@ const createProduct = async (productData) => {
 };
 const getProduct = async (productId) => {
   try {
-    const response = await axios.get(`/product/${productId}`);
+    const response = await axios.get(API_URL + `/product/${productId}`);
 
     return response.data;
   } catch (err) {
@@ -63,7 +79,10 @@ const deleteProduct = async (productId) => {
     },
   };
   try {
-    const response = await axios.delete(`/product/${productId}`, config);
+    const response = await axios.delete(
+      API_URL + `/product/${productId}`,
+      config
+    );
 
     return response.data;
   } catch (err) {
@@ -79,7 +98,11 @@ const updateProduct = async (d) => {
     },
   };
   try {
-    const response = await axios.put(`/product/${_id}`, productData, config);
+    const response = await axios.put(
+      API_URL + `/product/${_id}`,
+      productData,
+      config
+    );
 
     return response.data;
   } catch (err) {
@@ -92,6 +115,7 @@ const productData = {
   createProduct,
   getAllProducts,
   getProduct,
+  getAllProductsList,
   updateProduct,
   deleteProduct,
   relatedProducts,

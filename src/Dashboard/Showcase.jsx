@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllProducts } from "../app/Feartures/Product/ProductSlice";
+import { getAllProductsList } from "../app/Feartures/Product/ProductSlice";
 import Product from "./Product";
 function Showcase({ createProd }) {
   const { products } = useSelector((state) => state.Product);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAllProducts());
+    dispatch(getAllProductsList());
   }, []);
 
   return (
@@ -21,23 +21,25 @@ function Showcase({ createProd }) {
           </div>
           <div className="container">
             <h1 className="text-center my-2 h3">Products List</h1>
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">name</th>
-                  <th scope="col">quantity</th>
-                  <th scope="col">description</th>
-                  <th scope="col">price</th>
-                  <th scope="col">actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {products.length > 0 &&
-                  products.map((product) => {
-                    return <Product product={product} key={product._id} />;
-                  })}
-              </tbody>
-            </table>
+            <div className="table-responsive">
+              <table class="table ">
+                <thead>
+                  <tr>
+                    <th scope="col">name</th>
+                    <th scope="col">quantity</th>
+                    <th scope="col">description</th>
+                    <th scope="col">price</th>
+                    <th scope="col">actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {products.length > 0 &&
+                    products.map((product) => {
+                      return <Product product={product} key={product._id} />;
+                    })}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>

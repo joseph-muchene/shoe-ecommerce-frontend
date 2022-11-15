@@ -13,6 +13,7 @@ function Register() {
     username: "",
     password: "",
     email: "",
+    phone_number: "",
   });
   const { message, registered, isSuccess } = useSelector(({ Auth }) => Auth);
   const navigate = useNavigate();
@@ -39,17 +40,23 @@ function Register() {
       [name]: value,
     });
   };
-  const { email, password, username } = formData;
+  const { email, password, username, phone_number } = formData;
 
   const onRegister = (e) => {
     e.preventDefault();
-    if (email == "" || password == " " || username == "") {
+    if (
+      email == "" ||
+      password == " " ||
+      username == "" ||
+      phone_number === ""
+    ) {
       return toast.error("All fields are required");
     }
     const userData = {
       email,
       password,
       username,
+      phone_number,
       isAdmin: false,
     };
 
@@ -77,6 +84,16 @@ function Register() {
             className="form-control"
             value={username}
             name="username"
+            onChange={handleOnChange}
+          />
+        </div>
+        <div className="mt-3">
+          <label htmlFor="">phone</label>
+          <input
+            type="text"
+            className="form-control"
+            value={phone_number}
+            name="phone_number"
             onChange={handleOnChange}
           />
         </div>

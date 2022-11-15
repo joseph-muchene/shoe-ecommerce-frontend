@@ -19,6 +19,7 @@ function Order({ order }) {
       <tr>
         <td>{order.ReceiptNumber}</td>
         <td>{order?.email}</td>
+        <td>{order?.phone_number}</td>
         <td>{order.products.length}</td>
         <td>{order.amount}</td>
         <td>{order.status}</td>

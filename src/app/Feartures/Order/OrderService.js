@@ -1,5 +1,7 @@
 import axios from "axios";
 
+
+const API_URL = "https://azim-online-store-backend.onrender.com/api";
 const getAllOrders = async () => {
   const config = {
     headers: {
@@ -7,7 +9,7 @@ const getAllOrders = async () => {
     },
   };
   try {
-    const response = await axios.get(`/order`, config);
+    const response = await axios.get(API_URL+`/order`, config);
 
     return response.data;
   } catch (error) {
@@ -18,7 +20,7 @@ const getAllOrders = async () => {
 const userOrders = async () => {
   const userId = JSON.parse(localStorage.getItem("user")._id);
   try {
-    const response = await axios.get(`/user/${userId}`);
+    const response = await axios.get(API_URL + `/user/${userId}`);
 
     return response.data;
   } catch (error) {
@@ -33,7 +35,7 @@ const getOrder = async (orderId) => {
         token: `Bearer ${user.token}`,
       },
     };
-    const response = await axios.get(`/order/${orderId}`, config);
+    const response = await axios.get(API_URL + `/order/${orderId}`, config);
 
     return response.data;
   } catch (error) {
@@ -49,7 +51,11 @@ const createOrder = async (productData) => {
     },
   };
   try {
-    const response = await axios.post("/order/create", productData, config);
+    const response = await axios.post(
+      API_URL + "/order/create",
+      productData,
+      config
+    );
 
     return response.data;
   } catch (error) {
@@ -66,7 +72,7 @@ const updateOrder = async (payload) => {
   };
   try {
     const response = await axios.put(
-      `/order/update/${orderId}`,
+      API_URL + `/order/update/${orderId}`,
       orderData,
       config
     );
@@ -84,7 +90,10 @@ const deleteOrder = async (orderId) => {
     },
   };
   try {
-    const response = await axios.delete(`/order/delete/${orderId}`, config);
+    const response = await axios.delete(
+      API_URL + `/order/delete/${orderId}`,
+      config
+    );
 
     return response.data;
   } catch (err) {

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { createProduct } from "../app/Feartures/Product/ProductSlice";
 import { storage } from "../config";
@@ -18,7 +18,6 @@ function AddProduct() {
     photo: "",
     category: "",
   });
-  const { isSuccess, isError, message } = useSelector(({ Product }) => Product);
 
   const handleOnChange = (e) => {
     //const name = e.target.name
@@ -34,6 +33,9 @@ function AddProduct() {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    if (title === "" || desc === "" || price === "") {
+      return toast.error("All fields are required");
+    }
     try {
       const productData = {
         title,
@@ -44,12 +46,21 @@ function AddProduct() {
         category,
       };
       if (Photourl === "") {
-        alert("please upload an image first");
+        return toast.error("please upload an image first");
       } else {
         dispatch(createProduct(productData));
-        if (isSuccess && !isError) {
-          alert("product was created");
-        }
+        // if (isSuccess && !isError) {
+        //   return toast.success("product was created");
+        // }
+
+        setFormData((prevState) => ({
+          ...prevState,
+          title: "",
+          desc: "",
+          price: "",
+          photo: "",
+          category: "",
+        }));
       }
     } catch (err) {
       console.log(err);
@@ -190,7 +201,10 @@ function AddProduct() {
 
           <div>
             <div className="mt-3">
-              <button className="btn btn-block btn-secondary mb-4">
+              <button
+                type="submit"
+                className="btn btn-block btn-secondary mb-4"
+              >
                 Create Product
               </button>
             </div>

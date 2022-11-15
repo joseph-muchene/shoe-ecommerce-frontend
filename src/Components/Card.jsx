@@ -3,7 +3,7 @@ import React from "react";
 function Card({ data }) {
   return (
     <div className="col-md-6 mb-2">
-      <div class="card" style={{ width: "18rem" }}>
+      <div class="card">
         <div class="card-body d-flex flex-row gap-2">
           <div>
             <h5>{data.name}</h5>

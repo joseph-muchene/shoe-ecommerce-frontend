@@ -24,9 +24,9 @@ function Related({ product }) {
           </Link>
 
           <div class="label-top shadow-sm">
-            <a class="text-white" href="#">
+            <Link class="text-white" to="#">
               {product.title}
-            </a>
+            </Link>
           </div>
           <div class="card-body">
             <div class="clearfix mb-3">
@@ -36,16 +36,14 @@ function Related({ product }) {
 
               {product.rating > 0 && (
                 <span class="float-end">
-                  <a href="#" class="small text-muted  aff-link">
+                  <Link to="#" class="small text-muted  aff-link">
                     rating {product.rating}.00
-                  </a>
+                  </Link>
                 </span>
               )}
             </div>
             <p class="card-title">
-              <a target="_blank" href="#">
-                {product.title}
-              </a>
+              <Link to="#">{product.title}</Link>
             </p>
 
             {/* <div class="d-grid gap-2 my-4">

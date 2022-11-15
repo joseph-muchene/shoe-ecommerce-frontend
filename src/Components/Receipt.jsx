@@ -3,6 +3,7 @@ import React from "react";
 import Moment from "react-moment";
 import ReceiptItem from "./ReceiptItem";
 import { jsPDF } from "jspdf";
+import Payment from "./Payment";
 function Receipt({ order, cartItems }) {
   const exportPDF = () => {
     const input = document.getElementById("receipt");
@@ -25,6 +26,7 @@ function Receipt({ order, cartItems }) {
     <>
       <div className="d-flex justify-content-center"></div>
       <div className="shadow" id="receipt">
+        <Payment/>
         <h1 className="text-center my-3">Receipt</h1>
         <hr />
 
@@ -35,42 +37,48 @@ function Receipt({ order, cartItems }) {
           </div>
           <div className="receipt">
             <div className="container col-sm">
-              <table className="table table-striped table-responsive">
-                <thead className="bg-secondary">
-                  <tr>
-                    <th>Receipt Number</th>
-                    <th>Date</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>{order?.ReceiptNumber}</td>
-                    <td>{<Moment format="YYYY/MM/DD">{Date.now()}</Moment>}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+              <div className="table-responsive">
+                <table className="table table-striped ">
+                  <thead className="bg-secondary">
+                    <tr>
+                      <th>Receipt Number</th>
+                      <th>Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>{order?.ReceiptNumber}</td>
+                      <td>
+                        {<Moment format="YYYY/MM/DD">{Date.now()}</Moment>}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
 
-            <div className="container mt-3">
-              <table className="table table-responsive">
-                <thead
-                  className="text-white"
-                  style={{ backgroundColor: "#444" }}
-                >
-                  <tr>
-                    <th>Name</th>
-                    <th>price</th>
-                    <th>quantity</th>
-                    <th>amount</th>
-                    <th>status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {cartItems.map((item) => (
-                    <ReceiptItem item={item} />
-                  ))}
-                </tbody>
-              </table>
+              <div className="container mt-3">
+                <div className="table-responsive">
+                  <table className="table ">
+                    <thead
+                      className="text-white"
+                      style={{ backgroundColor: "#444" }}
+                    >
+                      <tr>
+                        <th>Name</th>
+                        <th>price</th>
+                        <th>quantity</th>
+                        <th>amount</th>
+                        <th>status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {cartItems.map((item) => (
+                        <ReceiptItem item={item} />
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
               <h1 className="text-center h3 ">Amount {order.amount}</h1>
               {/* actions */}
             </div>
@@ -81,7 +89,11 @@ function Receipt({ order, cartItems }) {
         </div>
       </div>
       <div className="btn-group d-flex justify-content-center">
-        <button className="btn btn-block btn-dark mt-3">
+        <button
+          className="btn btn-block btn-dark mt-3"
+          data-mdb-toggle="modal"
+          data-mdb-target="#exampleModal"
+        >
           Confirm Purchase
         </button>
         <button
